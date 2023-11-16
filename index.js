@@ -14,7 +14,6 @@ HTTP_SERVER.use(bodyParser.urlencoded({ extended: false }));
 
 // BASIC SERVER CONFIGS
 const port = 5000;
-const localhost= '127.0.0.1'
 
 HTTP_SERVER.listen(port, 'localhost', () => {
   console.log("SERVER STARTED IN ", port);
