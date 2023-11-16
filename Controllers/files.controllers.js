@@ -3,9 +3,9 @@ const fs = require('fs/promises');
 const content= new Date().toString().replace(/[:.]/g,'-');
 const path=`./File/${content}.txt`
 
-async function createFile() {
+async function createFile(data = null) {
   try {
-    await fs.writeFile(path, content);
+    await fs.writeFile(path,  data ? data : content);
   } catch (err) {
     console.log(err);
   }
@@ -19,4 +19,40 @@ FilesRouter.get('/createDefaultFile', (request, response, next) => {
     message: 'Request hit',
   });
 });
+
+FilesRouter.get('/createCustomFile/:content', (request, response, next) => {
+  const { content } = request.params;
+  createFile(content);
+  return response.status(200).json({
+    message: 'Request hit',
+  });
+});
+
+// API: https://stackblitzstartersaqsqlc-ac35--5000--bec01ace.local-credentialless.webcontainer.io/files/createCustomFile
+// JAVASCRIPT CODE:
+// fetch('https://stackblitzstartersaqsqlc-ac35--5000--bec01ace.local-credentialless.webcontainer.io/createCustomFile', {
+//     method: "POST", // *GET, POST, PUT, DELETE, etc.
+//     mode: "cors", // no-cors, *cors, same-origin
+//     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+//     credentials: "same-origin", // include, *same-origin, omit
+//     headers: {
+//       "Content-Type": "application/json",
+//       // 'Content-Type': 'application/x-www-form-urlencoded',
+//     },
+//     redirect: "follow", // manual, *follow, error
+//     referrerPolicy: "same-origin", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+//     body: JSON.stringify({
+//         content: "Hello"
+//     }), // body data type must match "Content-Type" header
+//   }).then((response) => response.json()).then((result) => console.log(result)).catch((err) => console.log('ERROR OCCURED', err));
+
+
+FilesRouter.post('/createCustomFile', async (request, response, next) => {
+  const { content } = request.body;
+  await createFile(content);
+  return response.status(200).json({
+    message: 'File created',
+  });
+});
+
 module.exports = FilesRouter;
