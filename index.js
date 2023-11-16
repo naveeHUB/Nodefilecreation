@@ -14,9 +14,10 @@ HTTP_SERVER.use(bodyParser.urlencoded({ extended: false }));
 
 // BASIC SERVER CONFIGS
 const port = 5000;
+const localhost= '0.0.0.0'
 
-HTTP_SERVER.listen(port, 'localhost', () => {
-  console.log("SERVER STARTED IN ", port);
+HTTP_SERVER.listen(port, localhost, () => {
+  console.log("SERVER STARTED IN ",`${localhost}:${port}` );
 });
 
 // INJECTING API SERVER
