@@ -17,7 +17,7 @@ const port = 5000;
 const localhost= '0.0.0.0'
 
 HTTP_SERVER.listen(port, localhost, () => {
-  console.log("SERVER STARTED IN ",`${localhost}:${port}` );
+  console.log("SERVER STARTED IN ", port);
 });
 
 // INJECTING API SERVER
