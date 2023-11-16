@@ -16,7 +16,7 @@ HTTP_SERVER.use(bodyParser.urlencoded({ extended: false }));
 const port = 5000;
 const localhost= '127.0.0.1'
 
-HTTP_SERVER.listen(port, 'localhost', () => {
+HTTP_SERVER.listen(port, localhost, () => {
   console.log(`SERVER STARTED IN - http://${localhost}:${port}`);
 });
 
